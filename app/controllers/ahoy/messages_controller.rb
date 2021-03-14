@@ -37,11 +37,22 @@ module Ahoy
       signature = OpenSSL::HMAC.hexdigest(digest, AhoyEmail.secret_token, url)
 
       if ActiveSupport::SecurityUtils.secure_compare(user_signature, signature)
-        url_with_click_id = publish :click, url: params[:url]
-        puts "whats url_with_click_id: " + url_with_click_id.inspect
+
+        # url_with_click_id = publish :click, url: params[:url]
+        @url_with_click_id = url
+        AhoyEmail.subscribers.each do |subscriber|
+          if subscriber.respond_to?(name)
+            event[:message] = @message
+            event[:controller] = self
+            @url_with_click_id = subscriber.send name, event
+          end
+        end
+
+
+        puts "whats url_with_click_id: " + @url_with_click_id.first.inspect
         puts "old url: " + url.inspect
 
-        redirect_to url_with_click_id
+        redirect_to @url_with_click_id
       else
         redirect_to AhoyEmail.invalid_redirect_url || main_app.root_url
       end

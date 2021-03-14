@@ -41,7 +41,7 @@ module Ahoy
         # url_with_click_id = publish :click, url: params[:url]
         @url_with_click_id = url
         AhoyEmail.subscribers.each do |subscriber|
-          if subscriber.respond_to?(name)
+          if subscriber.respond_to?(:click)
             event[:message] = @message
             event[:controller] = self
             @url_with_click_id = subscriber.send :click, params[:url]

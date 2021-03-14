@@ -50,10 +50,6 @@ module Ahoy
           end
         end
 
-
-        puts "whats url_with_click_id: " + @url_with_click_id.first.inspect
-        puts "old url: " + url.inspect
-
         redirect_to @url_with_click_id
       else
         redirect_to AhoyEmail.invalid_redirect_url || main_app.root_url

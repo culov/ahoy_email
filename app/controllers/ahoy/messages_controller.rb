@@ -44,7 +44,7 @@ module Ahoy
           if subscriber.respond_to?(name)
             event[:message] = @message
             event[:controller] = self
-            @url_with_click_id = subscriber.send name, event
+            @url_with_click_id = subscriber.send :click, params[:url]
           end
         end
 

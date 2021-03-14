@@ -38,6 +38,8 @@ module Ahoy
 
       if ActiveSupport::SecurityUtils.secure_compare(user_signature, signature)
         url_with_click_id = publish :click, url: params[:url]
+        puts "whats url_with_click_id: " + url_with_click_id.inspect
+        puts "old url: " + url.inspect
 
         redirect_to url_with_click_id
       else

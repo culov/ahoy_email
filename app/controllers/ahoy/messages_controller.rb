@@ -37,9 +37,9 @@ module Ahoy
       signature = OpenSSL::HMAC.hexdigest(digest, AhoyEmail.secret_token, url)
 
       if ActiveSupport::SecurityUtils.secure_compare(user_signature, signature)
-        publish :click, url: params[:url]
+        url_with_click_id = publish :click, url: params[:url]
 
-        redirect_to url
+        redirect_to url_with_click_id
       else
         redirect_to AhoyEmail.invalid_redirect_url || main_app.root_url
       end

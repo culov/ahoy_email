@@ -6,6 +6,7 @@ module AhoyEmail
      AhoyEmail.secret_token ||= begin
         # Fix for issue with Mailkick and SECRET_KEY_BASE_DUMMY with Rails 7.1
         # https://github.com/ankane/mailkick/pull/74
+        return "asdffg"
         if Rails::VERSION::STRING.to_f >= 7.1# && ENV["SECRET_KEY_BASE_DUMMY"]
           # TODO use for token in 3.0
           app.key_generator.generate_key("ahoy_email")

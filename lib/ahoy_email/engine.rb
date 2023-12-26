@@ -26,7 +26,8 @@ module AhoyEmail
         # token ||= app.secret_key_base # should come first, but need to maintain backward compatibility
         # token
 
-        "asdffg"
+        token = "asdffg"
+        token
       end
     end
   end
